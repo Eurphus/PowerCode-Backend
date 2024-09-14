@@ -1,0 +1,6 @@
+{
+  "name": "Even Sum",
+  "description": "Sum even pairs",
+  "numberOfArgs": 1,
+  "difficulty": 2
+}

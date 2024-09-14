@@ -1,21 +1,20 @@
 import ast
 import os
 
-bad_code = """
-for i in range(0, 4):
-    print + l)
-"""
-
-good_code = """
-def solution(inp):
-    sum = 0
-    for num in inp:
-        if num % 2 == 0:
-            sum += num
-    return sum
-"""
-
-language = "Python"
+# bad_code = """
+# for i in range(0, 4):
+#     print + l)
+# """
+#
+# good_code = """
+# def solution(inp):
+#     sum = 0
+#     for num in inp:
+#         if num % 2 == 0:
+#             sum += num
+#     return sum
+# """
+#
 
 
 def ingest_input(key):
@@ -35,68 +34,73 @@ def ingest_input(key):
     else:
         return key
 
-
-def get_test_cases(challenge: str) -> list:
+def get_test_cases(language: str, challenge: str) -> list:
     """
     Returns a list of all test cases contained in a challenge. Stored in list with tuples (input, expected)
+    :param language:
     :param challenge:
     :return:
     """
+    submission_path = os.getcwd().replace('\\', '/') + f"/submissions/{language}/{challenge}"
 
-    cases = []
-    submission_path = os.getcwd().replace('\\', '/') + "/submissions/" + challenge
-    for file_name in os.listdir(submission_path + "/input/"):
-        input_file = open(submission_path + "/input/" + file_name, "r")
-        input_digest = ingest_input(input_file.read())
+    input_file = open(submission_path + "/input.txt", "r")
+    input_list = [ingest_input(line.rstrip('\n')) for line in input_file]
+    input_file.close()
 
-        output_file = open(submission_path + "/output/output" + file_name[-6:], "r")
-        output_digest = ingest_input(output_file.read())
+    output_file = open(submission_path + "/output.txt", "r")
+    output_list = [ingest_input(line.rstrip('\n')) for line in output_file]
+    output_file.close()
 
-        cases.append((input_digest, output_digest))
-        output_file.close()
-        input_file.close()
+    cases = [(input_list[i], output_list[i]) for i in range(len(input_list))]
     return cases
 
-def run_test_cases(code: str, challenge: str):
+def run_test_cases(code: str, language: str, challenge: str):
     print(f"\n\nStarting {challenge}!")
     #
     # Syntax Check
     #
     try:
         ast.parse(code)
-        response = (True, 0)
         print("Syntax Check Passed")
     except SyntaxError as error:
-        response = (False, error)
-        print("Syntax Check Failed")
+        return {
+            "success": 3,
+            "error": str(error),
+            "description": "Syntax Error"
+        }
 
     #
     # Defining submission in local scope
     #
-    if response[0]:
-        try:
-            if language == "Python":
-                scope = {}
-                exec(code, {}, scope)
-                print("Function Exec Passed")
-        except SyntaxError as error:
-            print(f"): Error:\n{error}")
-            print("Function Exec Failed")
-    else:
-        print(f"""There is a syntax error. Please try again. \nError Below \n{str(response[1])}:""")
-        return 1
+    scope = {}
+    try:
+        if language == "python":
+            exec(code, {}, scope)
+            print("Function Exec Passed")
+    except Exception as error:
+        return {
+            "success": 4,
+            "error": str(error),
+            "description": "Code failed function declaration"
+        }
+    except:
+        return {
+            "success": 99,
+            # "error": "",
+            "description": "unknown error"
+        }
 
     #
     # Running the test cases
     #
 
-    cases = get_test_cases(challenge)
+    cases = get_test_cases(language, challenge)
     data_collection = []
     total_success = 0
     total_runs = 0
 
     for inp, sol in cases:
-        success = 0 # 0 Indicates a pass, 1 indicates a wrong value, 2 or other is an error
+        success = 0  # 0 Indicates a pass, 1 indicates a wrong value, 2 or other is an error
         error = ""
         try:
             print(inp)
@@ -109,11 +113,23 @@ def run_test_cases(code: str, challenge: str):
         except Exception as e:
             success = 2
             error = str(e)
-            total_runs += 1
-        data_collection.append((success, inp, sol, error))
+            returned = "ERROR"
+        total_runs += 1
+        data_collection.append({
+            "success": success,
+            "input": inp,
+            "solution": sol,
+            "returned": returned,
+            "error": error})
 
     success = 0 if total_runs == total_success else 1
+    print(success)
+    print(total_success)
+    print(total_runs)
 
-    return success, data_collection
-
-run_test_cases(good_code, "sum-even")
+    return {
+        "success": success,
+        "successful_runs": total_success,
+        "total": total_runs,
+        "data": data_collection
+    }
