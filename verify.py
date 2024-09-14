@@ -1,8 +1,5 @@
 import ast
-import sys
 import os
-import tempfile
-from io import StringIO
 
 bad_code = """
 for i in range(0, 4):
