@@ -92,6 +92,8 @@ def run_test_cases(code: str, challenge: str):
 
     cases = get_test_cases(challenge)
     data_collection = []
+    total_success = 0
+    total_runs = 0
 
     for inp, sol in cases:
         success = 0 # 0 Indicates a pass, 1 indicates a wrong value, 2 or other is an error
@@ -102,12 +104,16 @@ def run_test_cases(code: str, challenge: str):
 
             if returned != sol:
                 success = 1
+            else:
+                total_success += 1
         except Exception as e:
             success = 2
             error = str(e)
-
+            total_runs += 1
         data_collection.append((success, inp, sol, error))
 
-    print(data_collection)
+    success = 0 if total_runs == total_success else 1
+
+    return success, data_collection
 
 run_test_cases(good_code, "sum-even")

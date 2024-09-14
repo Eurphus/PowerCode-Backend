@@ -18,13 +18,5 @@ async def verify_code(challenge: str, request: code_request):
     response = run_test_cases(request.code, challenge)
     return {
         "success": response[0],
-        "error": response[3]
-    }
-
-@app.get("/api/code-checkk/{challenge}")
-async def verify_code(challenge: str, request: code_request):
-    print("FOUND: " + challenge)
-    return {
-        "success": 1,
-        "error": 2
+        "tests": response[1]
     }
