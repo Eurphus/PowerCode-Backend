@@ -1,23 +1,8 @@
 import ast
 import os
 
-# bad_code = """
-# for i in range(0, 4):
-#     print + l)
-# """
-#
-# good_code = """
-# def solution(inp):
-#     sum = 0
-#     for num in inp:
-#         if num % 2 == 0:
-#             sum += num
-#     return sum
-# """
-#
 
-
-def ingest_input(key):
+def normalize_data(key):
     """
     Normalizes inputs to match python program output
     :param key:
@@ -34,6 +19,7 @@ def ingest_input(key):
     else:
         return key
 
+
 def get_test_cases(language: str, challenge: str) -> list:
     """
     Returns a list of all test cases contained in a challenge. Stored in list with tuples (input, expected)
@@ -41,18 +27,19 @@ def get_test_cases(language: str, challenge: str) -> list:
     :param challenge:
     :return:
     """
-    submission_path = os.getcwd().replace('\\', '/') + f"/submissions/{language}/{challenge}"
+    challenge_path = os.getcwd().replace('\\', '/') + f"/app/challenges/{language}/{challenge}"
 
-    input_file = open(submission_path + "/input.txt", "r")
-    input_list = [ingest_input(line.rstrip('\n')) for line in input_file]
+    input_file = open(challenge_path + "/input.txt", "r")
+    input_list = [normalize_data(line.rstrip('\n')) for line in input_file]
     input_file.close()
 
-    output_file = open(submission_path + "/output.txt", "r")
-    output_list = [ingest_input(line.rstrip('\n')) for line in output_file]
+    output_file = open(challenge_path + "/output.txt", "r")
+    output_list = [normalize_data(line.rstrip('\n')) for line in output_file]
     output_file.close()
 
     cases = [(input_list[i], output_list[i]) for i in range(len(input_list))]
     return cases
+
 
 def run_test_cases(code: str, language: str, challenge: str):
     print(f"\n\nStarting {challenge}!")
@@ -70,7 +57,7 @@ def run_test_cases(code: str, language: str, challenge: str):
         }
 
     #
-    # Defining submission in local scope
+    # Defining challenge in local scope
     #
     scope = {}
     try:
