@@ -5,20 +5,27 @@ from app.models import CodeRequest
 from random import choice
 from app.utils import dockerize as dockerize
 from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*']
+    allow_origins=['*'],
+    allow_credentials=True,
+    allow_methods=[""],  # Allows all HTTP methods (GET, POST, etc.)
+    allow_headers=[""]
 )
+
 
 @app.get("/api/message")
 async def root():
     return {"message": "World"}
 
+
 @app.get("/api/details/all")
 async def get_all_details():
     return challenge_data
+
 
 @app.get("/api/match/{language}")
 async def match_users(language: str):
@@ -30,6 +37,7 @@ async def match_users(language: str):
     print(match)
 
     return match
+
 
 @app.get("/api/details/{language}/{challenge}")
 async def get_details(language: str, challenge: str):
@@ -55,6 +63,7 @@ async def verify_code(language: str, challenge: str, request: CodeRequest):
     print("FOUND: " + challenge)
     response = run_test_cases(request.code, language, challenge)
     return response
+
 
 @app.post("/api/init-game/{language}/{challenge}")
 async def init_game(language: str, challenge: str, user_id_1: int, user_id_2: int):
