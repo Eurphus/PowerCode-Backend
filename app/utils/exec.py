@@ -17,6 +17,10 @@ def normalize_data(key):
             return [int(num) for num in lst]
         else:
             return lst
+    elif key == "true":
+        return True
+    elif key == "false":
+        return False
     else:
         return key
 
