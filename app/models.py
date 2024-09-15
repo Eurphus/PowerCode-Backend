@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class CodeRequest(BaseModel):
     code: str
-    user_id: int
+    user_id: str
 
 
 class UserScoreRequest(BaseModel):
