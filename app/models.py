@@ -6,6 +6,6 @@ class CodeRequest(BaseModel):
     user_id: int
 
 
-class UserRequest(BaseModel):
-    user1: int
-    user2: int
+class UserScoreRequest(BaseModel):
+    user_score_1: int
+    user_score_2: int

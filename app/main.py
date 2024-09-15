@@ -1,10 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from app.utils.exec import run_test_cases
 from app.utils.info import challenge_data
-from app.models import CodeRequest
-
+from app.models import CodeRequest, UserScoreRequest
+from random import choice
+from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*']
+)
 
 @app.get("/api/message")
 async def root():
@@ -14,6 +19,16 @@ async def root():
 async def get_all_details():
     return challenge_data
 
+@app.get("/api/match/{language}")
+async def match_users(language: str, request: UserScoreRequest):
+    if language not in challenge_data:
+        raise HTTPException(404, detail="Please include a valid language")
+
+    avg = (request.user_score_1 + request.user_score_2) // 2000
+    match = challenge_data[language][choice(list(challenge_data[language]))]
+    print(match)
+
+    return match
 
 @app.get("/api/details/{language}/{challenge}")
 async def get_details(language: str, challenge: str):
@@ -27,7 +42,7 @@ async def get_details(language: str, challenge: str):
     return challenge_data[language][challenge]
 
 
-@app.post("/api/code-check/{language}/{challenge}")
+@app.get("/api/code-check/{language}/{challenge}")
 async def verify_code(language: str, challenge: str, request: CodeRequest):
     if not challenge and not language:
         raise HTTPException(404, detail="Please include a language and challenge")

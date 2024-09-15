@@ -1,5 +1,6 @@
 import ast
 import os
+import docker
 
 
 def normalize_data(key):
