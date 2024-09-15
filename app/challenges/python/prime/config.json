@@ -1,7 +1,0 @@
-{
-  "name": "Prime",
-  "description": "Check if a number is prime or not",
-  "instructions": "Given an integer, return true if the number is prime and return false if the number is not prime (ignore 0 to the power of 0)",
-  "numberOfArgs": 1,
-  "difficulty": 1
-}
