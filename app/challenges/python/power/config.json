@@ -1,0 +1,7 @@
+{
+  "name": "Even Sum",
+  "description": "Sum even pairs",
+  "instructions": "Given a list of integers, sum and return all even integers ",
+  "numberOfArgs": 1,
+  "difficulty": 2
+}
