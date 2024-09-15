@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Palindrome",
+  "description": "Check if a string is a palindrome or not",
+  "instructions": "Given a string, return true if the string is a palindrome and return false if the string is not a palindrome",
   "numberOfArgs": 1,
   "difficulty": 2
 }

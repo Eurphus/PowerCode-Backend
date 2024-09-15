@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Even or Odd",
+  "description": "Check if a number is even or odd",
+  "instructions": "Given an integer, return the string \"even\" if the integer is even and return the string \"odd\" if the integer is odd",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }

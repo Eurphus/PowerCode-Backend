@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Multiple of Three",
+  "description": "Check if a number is a multiple of three or not",
+  "instructions": "Given an integer, return true if the number is divisible by 3 and return false if the number is not divisible by 3",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }

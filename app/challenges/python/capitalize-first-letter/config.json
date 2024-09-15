@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Capitalize First Letter",
+  "description": "Capitalize the first letter of a word",
+  "instructions": "Given a string that only contains alphabetical characters, return the same string with the first character capitalized",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }

@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Contains a",
+  "description": "Check if a sting contains the letter a",
+  "instructions": "Given a string, return true if the string contains the lowercase letter a and return false if the string does not contain the lowercase letter a",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }

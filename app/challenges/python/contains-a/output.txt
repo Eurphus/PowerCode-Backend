@@ -1,3 +1,10 @@
-36
-0
-22
+true
+false
+3433a
+true
+false
+true
+true
+false
+false
+true

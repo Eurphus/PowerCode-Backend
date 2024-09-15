@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Check character",
+  "description": "Check if a character is a vowel or not",
+  "instructions": "Given a character, return true if the character is a vowel and return false if the character is not a vowel",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }

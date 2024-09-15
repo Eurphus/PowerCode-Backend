@@ -1,7 +1,7 @@
 {
-  "name": "Even Sum",
-  "description": "Sum even pairs",
-  "instructions": "Given a list of integers, sum and return all even integers ",
+  "name": "Power",
+  "description": "Find the result of a number to the power of another number",
+  "instructions": "Given two integers, return the result of the first number to the power of the second number",
   "numberOfArgs": 1,
-  "difficulty": 2
+  "difficulty": 1
 }
